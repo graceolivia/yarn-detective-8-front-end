@@ -1,17 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <SearchBar
+    @ravelryQuery="(search, category) => searchRavelry(search, category)"
+  />
+  <ResultsList :results="results" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SearchBar from "./components/SearchBar.vue";
+import ResultsList from "./components/ResultsList.vue";
+import RavelryQuery from "./helpers/RavelryQuery.js";
 
 export default {
-  name: 'App',
+  data() {
+    return {
+      results: "Results Will Appear Here",
+    };
+  },
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    SearchBar,
+    ResultsList,
+  },
+  methods: {
+    async searchRavelry(message, category) {
+      this.results = await RavelryQuery(message, category);
+    },
+  },
+};
 </script>
 
 <style>
