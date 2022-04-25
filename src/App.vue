@@ -2,7 +2,7 @@
   <SearchBar
     @ravelryQuery="(search, category) => searchRavelry(search, category)"
   />
-  <ResultsList :results="results" />
+  <ResultsList :results="results.yarns" />
 </template>
 
 <script>
@@ -13,7 +13,7 @@ import RavelryQuery from "./helpers/RavelryQuery.js";
 export default {
   data() {
     return {
-      results: "Results Will Appear Here",
+      results: "",
     };
   },
   name: "App",
