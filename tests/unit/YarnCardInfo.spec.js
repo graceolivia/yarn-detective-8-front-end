@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import ResultCard from "@/components/ResultCard.vue";
+import YarnCardInfo from "@/components/YarnCardInfo.vue";
 
 function TestYarnJson() {
   let text =
@@ -11,15 +11,17 @@ function TestYarnJson() {
   return obj;
 }
 
-describe("ResultCard.vue", () => {
+describe("YarnCardInfo.vue", () => {
   it("displays expected HTML", () => {
     let yarnJson = TestYarnJson();
-    const wrapper = mount(ResultCard, {
+    const wrapper = mount(YarnCardInfo, {
       props: {
         item: yarnJson.yarns[0],
       },
       shallow: true,
     });
-    expect(wrapper.html()).toContain("<h3>Red Heart</h3>");
+    expect(wrapper.html()).toContain("<div>name : Red Heart</div>");
+    expect(wrapper.html()).toContain("<div>id : 1</div>");
+    expect(wrapper.html()).toContain('<div class="yarnCardInfo">');
   });
 });

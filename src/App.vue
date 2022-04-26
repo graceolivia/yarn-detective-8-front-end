@@ -2,13 +2,15 @@
   <SearchBar
     @ravelryQuery="(search, category) => searchRavelry(search, category)"
   />
-  <ResultsList :results="results.yarns" />
+  <ResultsList :results="results" />
 </template>
 
 <script>
 import SearchBar from "./components/SearchBar.vue";
 import ResultsList from "./components/ResultsList.vue";
 import RavelryQuery from "./helpers/RavelryQuery.js";
+import JsonCapitalizationHelper from "./helpers/JsonCapitalizationHelper.js";
+import YarnJsonCleaner from "./helpers/YarnJsonCleaner.js";
 
 export default {
   data() {
@@ -24,6 +26,10 @@ export default {
   methods: {
     async searchRavelry(message, category) {
       this.results = await RavelryQuery(message, category);
+      if (category === "yarns") {
+        this.results = YarnJsonCleaner(this.results.yarns);
+        this.results = JsonCapitalizationHelper(this.results);
+      }
     },
   },
 };
