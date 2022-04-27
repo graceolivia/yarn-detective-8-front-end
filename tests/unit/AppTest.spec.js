@@ -53,4 +53,25 @@ describe("App.vue", () => {
     expect(wrapper.html()).toContain("Silly Bamboo");
     expect(wrapper.html()).toContain("Gorgeous Goats");
   });
+
+  it("renders error message on error", async () => {
+    const wrapper = mount(App, {
+      data() {
+        return {
+          results: "something wrong",
+          error_message:
+            "There is a problem on the back end. Makes sure the Rails app is running and has the correct auth codes.",
+        };
+      },
+      components: {
+        SearchBar,
+        ResultsList,
+      },
+      props: {},
+    });
+
+    expect(wrapper.html()).toContain(
+      "<h3>There is a problem on the back end. Makes sure the Rails app is running and has the correct auth codes.</h3>"
+    );
+  });
 });
