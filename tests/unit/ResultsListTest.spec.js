@@ -5,9 +5,9 @@ import ResultCard from "@/components/ResultCard.vue";
 function TestYarnJson() {
   let text =
     '{ "yarns" : [' +
-    '{ "name":"Red Heart" , "id":"1" },' +
-    '{ "name":"Silly Bamboo" , "id":"2" },' +
-    '{ "name":"Gorgeous Goats" , "id":"3" } ]}';
+    '{ "Name":"Red Heart" , "id":"1" },' +
+    '{ "Name":"Silly Bamboo" , "id":"2" },' +
+    '{ "Name":"Gorgeous Goats" , "id":"3" } ]}';
   const obj = JSON.parse(text);
   return obj;
 }

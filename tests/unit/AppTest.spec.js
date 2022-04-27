@@ -5,7 +5,7 @@ import ResultsList from "@/components/ResultsList.vue";
 
 function TestYarnJson() {
   let text =
-    '{ "yarns" : [' +
+    '{ "Yarns" : [' +
     '{ "name":"Red Heart" , "id":"1" },' +
     '{ "name":"Silly Bamboo" , "id":"2" },' +
     '{ "name":"Gorgeous Goats" , "id":"3" } ]}';
@@ -34,7 +34,7 @@ describe("App.vue", () => {
     expect(spySearchRavelry).toBeCalled();
   });
 
-  it("passes json to Results List", async () => {
+  it("passes json to Results List and renders titles", async () => {
     const yarnJson = TestYarnJson();
     const wrapper = mount(App, {
       data() {
@@ -49,8 +49,8 @@ describe("App.vue", () => {
       props: {},
     });
 
-    expect(wrapper.html()).toContain("<h3>Red Heart</h3>");
-    expect(wrapper.html()).toContain("<h3>Silly Bamboo</h3>");
-    expect(wrapper.html()).toContain("<h3>Gorgeous Goats</h3>");
+    expect(wrapper.html()).toContain("Red Heart");
+    expect(wrapper.html()).toContain("Silly Bamboo");
+    expect(wrapper.html()).toContain("Gorgeous Goats");
   });
 });
