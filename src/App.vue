@@ -3,6 +3,7 @@
     @ravelryQuery="(search, category) => searchRavelry(search, category)"
   />
   <ResultsList :results="results" />
+  <h3>{{ error_message }}</h3>
 </template>
 
 <script>
@@ -16,6 +17,7 @@ export default {
   data() {
     return {
       results: "",
+      error_message: "",
     };
   },
   name: "App",
@@ -26,10 +28,15 @@ export default {
   methods: {
     async searchRavelry(message, category) {
       this.results = await RavelryQuery(message, category);
-      if (category === "yarns") {
-        this.results = YarnJsonCleaner(this.results.yarns);
-        this.results = JsonCapitalizationHelper(this.results);
-      }
+      if (category === "yarns")
+        try {
+          this.results = YarnJsonCleaner(this.results.yarns);
+          this.results = JsonCapitalizationHelper(this.results);
+        } catch {
+          this.results = "";
+          this.error_message =
+            "There is a problem on the back end. Makes sure the Rails app is running and has the correct auth codes.";
+        }
     },
   },
 };
